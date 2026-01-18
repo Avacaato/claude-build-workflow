@@ -6,54 +6,25 @@ This lets you start on your laptop, then continue from your phone or any device.
 
 ## How It Works
 
-1. **Planning phase** → Use Claude.ai (works on phone)
+1. **Planning phase** → Use Claude Code (works on laptop or in Codespaces)
 2. **Build phase** → Runs in GitHub Codespaces (free cloud environment, accessible from phone browser)
-3. **Notifications** → Get texts/notifications when build completes or needs attention
+3. **Notifications** → Get notifications when build completes or needs attention
 
 ---
 
 ## One-Time Setup (Do This Once)
 
-### 1. Create a GitHub Account (if you don't have one)
-- Go to github.com and sign up (free)
+Run the setup scripts:
 
-### 2. Create a Template Repository
-- Go to github.com and click "New Repository"
-- Name it `my-build-template`
-- Make it private
-- Check "Add a README"
-- Click "Create repository"
-
-### 3. Upload the Workflow Files
-From your laptop terminal:
 ```bash
-cd ~/Library/CloudStorage/Dropbox-Rohun/Ro\ J/Rohun\ Personal/01\ -\ Areas/06\ -\ Coding/claude-build-workflow
-
-# Clone your new repo
-git clone https://github.com/YOUR-USERNAME/my-build-template.git temp-upload
-cd temp-upload
-
-# Copy workflow files
-cp -r ../skills ./
-cp -r ../prompts ./
-cp ../ralph.sh ./
-cp ../CLAUDE.md ./
-chmod +x ralph.sh
-
-# Push to GitHub
-git add .
-git commit -m "Add build workflow"
-git push
-
-# Cleanup
-cd ..
-rm -rf temp-upload
+cd /path/to/claude-build-workflow
+./one-time-setup.sh      # Sets up GitHub template
+./setup-notifications.sh  # Sets up phone notifications
 ```
 
-### 4. Set Up Notifications (Optional but Recommended)
-- Download "Pushover" app on your phone ($5 one-time)
-- Or use free ntfy.sh app
-- Get your notification credentials (see NOTIFICATIONS.md)
+This automatically:
+- Creates a template repo on your GitHub
+- Configures notifications
 
 ---
 
@@ -62,7 +33,7 @@ rm -rf temp-upload
 ### From Your Laptop or Phone:
 
 #### Step 1: Create New Repository from Template
-1. Go to github.com/YOUR-USERNAME/my-build-template
+1. Go to github.com/YOUR-USERNAME/claude-build-template
 2. Click "Use this template" → "Create a new repository"
 3. Name it your project name (e.g., `my-cool-app`)
 4. Click "Create repository"
@@ -87,7 +58,7 @@ claude
 
 Then say:
 ```
-Read the CLAUDE.md file and run the workflow to help me build a new project.
+Run the workflow
 ```
 
 #### Step 5: Do the Planning

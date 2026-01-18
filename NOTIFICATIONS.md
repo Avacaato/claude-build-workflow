@@ -11,7 +11,7 @@ Get notified when your build completes, fails, or needs attention.
 - **Android**: Search "ntfy" in Play Store
 
 ### Step 2: Pick a Topic Name
-Choose a random/unique topic name like `rohun-builds-abc123`
+Choose a random/unique topic name like `my-builds-abc123`
 (Anyone who knows the topic can see notifications, so make it random)
 
 ### Step 3: Subscribe in the App
@@ -21,10 +21,10 @@ Open ntfy app → tap + → enter your topic name → Subscribe
 Create a file called `.notify-config` in your project folder:
 
 ```bash
-echo 'NTFY_TOPIC="rohun-builds-abc123"' > .notify-config
+echo 'NTFY_TOPIC="my-builds-abc123"' > .notify-config
 ```
 
-Replace `rohun-builds-abc123` with your topic name.
+Replace `my-builds-abc123` with your topic name.
 
 ### Done!
 You'll now get notifications for:
@@ -71,7 +71,7 @@ You can use both services - just put both in `.notify-config`:
 
 ```bash
 cat > .notify-config << 'EOF'
-NTFY_TOPIC="rohun-builds-abc123"
+NTFY_TOPIC="my-builds-abc123"
 PUSHOVER_USER="your-user-key"
 PUSHOVER_TOKEN="your-api-token"
 EOF
@@ -112,12 +112,4 @@ curl -s --form-string "token=YOUR_TOKEN" \
 **Per-project**: Put `.notify-config` in each project folder
 **Global**: Put `.notify-config` in the workflow folder, it will be copied to new projects
 
-To set up global notifications:
-```bash
-# Create global config
-cat > ~/Library/CloudStorage/Dropbox-Rohun/Ro\ J/Rohun\ Personal/01\ -\ Areas/06\ -\ Coding/claude-build-workflow/.notify-config << 'EOF'
-NTFY_TOPIC="your-topic"
-EOF
-```
-
-Then update the setup script to copy it to new projects.
+To set up global notifications, just run `./setup-notifications.sh` in the workflow folder.
