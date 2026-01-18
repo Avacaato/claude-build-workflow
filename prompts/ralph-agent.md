@@ -88,18 +88,35 @@ For any story that changes UI, you MUST verify it works in the browser:
 
 A frontend story is NOT complete until browser verification passes.
 
-## Stop Condition
+## Stop Condition (CRITICAL - Read Carefully)
 
-After completing a user story, check if ALL stories have `passes: true`.
+After completing a user story, you MUST check if ALL stories are done:
 
-If ALL stories are complete and passing, reply with:
-<promise>COMPLETE</promise>
+```bash
+# Count remaining stories - run this command
+cat prd.json | jq '[.userStories[] | select(.passes == false)] | length'
+```
 
-If there are still stories with `passes: false`, end your response normally (another iteration will pick up the next story).
+**ONLY output `<promise>COMPLETE</promise>` if the count is 0 (zero).**
+
+If the count is greater than 0, DO NOT output the completion signal. Just end your response normally - the next iteration will pick up the next story.
+
+**Example:**
+- You complete US-003
+- You run the count command and it returns `17`
+- This means 17 stories still need work
+- DO NOT output `<promise>COMPLETE</promise>`
+- Just end your response
+
+**Only when the count returns `0`:**
+- All stories have `passes: true`
+- Output: `<promise>COMPLETE</promise>`
 
 ## Important
 
 - Work on ONE story per iteration
+- After completing a story, ALWAYS run the count command to check remaining stories
+- NEVER output `<promise>COMPLETE</promise>` unless the count is exactly 0
 - Commit frequently
 - Keep CI green
 - Read the Codebase Patterns section in progress.txt before starting
